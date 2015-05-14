@@ -1,0 +1,7 @@
+[package]
+name = "robot_skills"
+version = "0.1.0"
+authors = ["Loy van Beek <loy.vanbeek@gmail.com>"]
+
+[dependencies.geometry_msgs]
+path = "../geometry_msgs/"

@@ -1,30 +1,30 @@
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Time {
     time: u64,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Header {
     seq: u32,
     stamp: Time,
-    frame_id: String
+    // frame_id: String //TODO: Copy not implemented for String
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Point {
     x: f64,
     y: f64,
     z: f64,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Vector3 {
     x: f64,
     y: f64,
     z: f64,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Quaternion {
     x: f64,
     y: f64,
@@ -32,31 +32,31 @@ pub struct Quaternion {
     w: f64,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct PointStamped {
     header: Header,
     point: Point,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Pose {
     position: Point,
     orientation: Quaternion,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct PoseStamped {
     header: Header,
     pose: Pose
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Twist {
     linear: Vector3,
     angular: Vector3,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct TwistStamped {
     header: Header,
     twist: Twist

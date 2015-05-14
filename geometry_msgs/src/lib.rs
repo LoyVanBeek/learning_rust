@@ -1,25 +1,25 @@
-struct Time {
+pub struct Time {
     time: u64,
 }
 
-struct Header {
+pub struct Header {
     seq: u32,
     stamp: Time,
     frame_id: String
 }
 
-struct Point {
+pub struct Point {
     x: f64,
     y: f64,
     z: f64,
 }
-struct Vector3 {
+pub struct Vector3 {
     x: f64,
     y: f64,
     z: f64,
 }
 
-struct Quaternion {
+pub struct Quaternion {
     x: f64,
     y: f64,
     z: f64,
@@ -27,27 +27,27 @@ struct Quaternion {
 }
 
 
-struct PointStamped {
+pub struct PointStamped {
     header: Header,
     point: Point,
 }
 
-struct Pose {
+pub struct Pose {
     position: Point,
     orientation: Quaternion,
 }
 
-struct PoseStamped {
+pub struct PoseStamped {
     header: Header,
     pose: Pose
 }
 
-struct Twist {
+pub struct Twist {
     linear: Vector3,
     angular: Vector3,
 }
 
-struct TwistStamped {
+pub struct TwistStamped {
     header: Header,
     twist: Twist
 }

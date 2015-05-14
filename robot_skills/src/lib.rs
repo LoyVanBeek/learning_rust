@@ -10,3 +10,9 @@ trait Base {
     fn reset_costmap(&self);
     fn cancel_goal(&self);
 }
+
+#[derive(Debug)]
+struct AmigoBase
+{
+    current_position: geometry_msgs::PoseStamped,
+}

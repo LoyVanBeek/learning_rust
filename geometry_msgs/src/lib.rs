@@ -1,6 +1,3 @@
-pub mod math;
-use math::Addable;
-
 #[derive(Debug, Clone, Copy)]
 pub struct Time {
     time: u64,
@@ -63,13 +60,4 @@ pub struct Twist {
 pub struct TwistStamped {
     header: Header,
     twist: Twist
-}
-
-
-impl Addable for Vector3 {
-    fn add(a: Vector3, b: Vector3) -> Vector3{
-        Vector3{x: a.x + b.x, 
-                y: a.y + b.y,
-                z: a.z + b.z}
-    }
 }

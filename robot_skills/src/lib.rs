@@ -1,6 +1,7 @@
 extern crate geometry_msgs;
 
 pub mod amigo_base;
+pub mod amigo_arm;
 
 // trait Base {
 //     fn base_move(& mut self, goal: geometry_msgs::PoseStamped);

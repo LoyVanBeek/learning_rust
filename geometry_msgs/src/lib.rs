@@ -104,3 +104,11 @@ impl Add for Quaternion {
                     w: self.w + _rhs.w }
     }
 }
+
+impl Add<Twist> for Pose {
+    type Output = Pose;
+
+    fn add(self: Self, _rhs: Twist) -> Pose {
+        Pose{   position: self.position + _rhs.linear, .. self}
+    }
+}

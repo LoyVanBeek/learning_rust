@@ -73,3 +73,22 @@ impl Add for Vector3 {
                 z: self.z + _rhs.z}
     }
 }
+
+impl Add<Vector3> for Point {
+    type Output = Point;
+
+    fn add(self: Self, _rhs: Vector3) -> Point {
+        Point{x: self.x + _rhs.x, 
+                y: self.y + _rhs.y, 
+                z: self.z + _rhs.z}
+    }
+}
+
+impl Add for Twist {
+    type Output = Twist;
+
+    fn add(self: Self, _rhs: Twist) -> Twist {
+        Twist{  linear: self.linear + _rhs.linear, 
+                angular: self.angular + _rhs.angular}
+    }
+}

@@ -1,3 +1,5 @@
+use std::ops::Add;
+
 #[derive(Debug, Clone, Copy)]
 pub struct Time {
     time: u64,
@@ -60,4 +62,14 @@ pub struct Twist {
 pub struct TwistStamped {
     header: Header,
     twist: Twist
+}
+
+impl Add for Vector3 {
+    type Output = Vector3;
+
+    fn add(self: Self, _rhs: Vector3) -> Vector3 {
+        Vector3{x: self.x + _rhs.x, 
+                y: self.y + _rhs.y, 
+                z: self.z + _rhs.z}
+    }
 }

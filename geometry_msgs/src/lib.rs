@@ -92,3 +92,15 @@ impl Add for Twist {
                 angular: self.angular + _rhs.angular}
     }
 }
+
+impl Add for Quaternion {
+    type Output = Quaternion;
+
+    //TODO: This is NOT actual quaternion adding but only a stub!
+    fn add(self: Self, _rhs: Quaternion) -> Quaternion {
+        Quaternion{ x: self.x + _rhs.x,
+                    y: self.y + _rhs.y,
+                    z: self.z + _rhs.z,
+                    w: self.w + _rhs.w }
+    }
+}

@@ -4,15 +4,19 @@ fn main() {
     //For numbers which are multiples of both three and five print “FizzBuzz”."
     println!("Hello FizzBuzz!");
 
-    let mut range = 1..100;
-
-    loop {
-        match range.next() {
-            Some(i) if i % 5 == 0 && i % 3 == 0 =>  println!("{} -> FizzBuzz!", i),
-            Some(i) if i % 3 == 0 =>  println!("{} -> Fizz!", i),
-            Some(i) if i % 5 == 0 =>  println!("{} -> Buzz!", i),
-            Some(i) =>  println!("{}", i),
-            None => { break }
+    for i in 1..101 {
+        if i % 5 == 0 && i % 3 == 0 { 
+            println!("{} -> FizzBuzz!", i);
         }
+        else if i % 3 == 0 { 
+            println!("{} -> Fizz!", i);
+        }
+        else if i % 5 == 0 { 
+            println!("{} -> Buzz!", i);
+        }
+        else { 
+            println!("{}", i);
+        }
+        // None => { break }
     }
 }

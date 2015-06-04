@@ -22,6 +22,7 @@ impl Base for AmigoBase {
     }
 
     fn force_drive(& mut self, direction: geometry_msgs::Twist){
+        self.current_position.pose = self.current_position.pose + direction;
     }
 
     fn get_location(& mut self) -> geometry_msgs::PoseStamped {

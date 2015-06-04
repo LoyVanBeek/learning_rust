@@ -105,10 +105,25 @@ impl Add for Quaternion {
     }
 }
 
+impl Add<Vector3> for Quaternion {
+    type Output = Quaternion;
+
+    //TODO: This is NOT actual quaternion adding but only a stub!
+    //You need a conversion with Euler angles etc. 
+    fn add(self: Self, _rhs: Vector3) -> Quaternion {
+        Quaternion{ x: self.x + _rhs.x,
+                    y: self.y + _rhs.y,
+                    z: self.z + _rhs.z,
+                    .. self}
+    }
+}
+
 impl Add<Twist> for Pose {
     type Output = Pose;
 
     fn add(self: Self, _rhs: Twist) -> Pose {
-        Pose{   position: self.position + _rhs.linear, .. self}
+        Pose{   position: self.position + _rhs.linear, 
+                orientation: self.orientation + _rhs.angular,
+                .. self}
     }
 }

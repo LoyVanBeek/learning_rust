@@ -1,32 +1,32 @@
 use std::ops::Add;
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct Time {
     pub time: u64,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct Header {
     pub seq: u32,
     pub stamp: Time,
     // frame_id: String //TODO: Copy not implemented for String
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct Point {
     pub x: f64,
     pub y: f64,
     pub z: f64,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct Vector3 {
     pub x: f64,
     pub y: f64,
     pub z: f64,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct Quaternion {
     pub x: f64,
     pub y: f64,
@@ -34,31 +34,31 @@ pub struct Quaternion {
     pub w: f64,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct PointStamped {
     pub header: Header,
     pub point: Point,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct Pose {
     pub position: Point,
     pub orientation: Quaternion,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct PoseStamped {
     pub header: Header,
     pub pose: Pose
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct Twist {
     pub linear: Vector3,
     pub angular: Vector3,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Default)]
 pub struct TwistStamped {
     pub header: Header,
     pub twist: Twist

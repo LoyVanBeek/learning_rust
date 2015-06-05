@@ -10,8 +10,8 @@ enum ArmError {
 
 pub type ArmResult = Result<bool, ArmError>;
 
-trait Arm {
-    // fn new(side: String) -> Arm;
+pub trait Arm {
+    fn new(side: String) -> Self;
     fn operational(& mut self) -> bool;
     fn send_goal(& mut self, goal: geometry_msgs::PoseStamped) -> ArmResult;
     fn send_joint_goal(& mut self, goal: Vec<f64>) -> ArmResult;
@@ -22,7 +22,7 @@ trait Arm {
 }
 
 #[derive(Debug)]
-struct AmigoArm
+pub struct AmigoArm
 {
     side: String,
     end_effector_pose: geometry_msgs::PoseStamped,
@@ -31,10 +31,13 @@ struct AmigoArm
 }
 
 impl Arm for AmigoArm {
-    // fn new(side: String) -> Arm{
-    //     Arm{side: side, 
-    //         operational: true}
-    // }
+    fn new(side: String) -> AmigoArm{
+        AmigoArm{   side:           side, 
+                    operational:    true,
+                    end_effector_pose: Default::default(),
+                    joints: vec![0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}
+    }
+    
     fn operational(& mut self) -> bool{
         return self.operational;
     }

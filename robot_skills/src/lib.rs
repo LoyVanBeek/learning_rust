@@ -3,12 +3,25 @@ extern crate geometry_msgs;
 pub mod amigo_base;
 pub mod amigo_arm;
 
-// trait Base {
-//     fn base_move(& mut self, goal: geometry_msgs::PoseStamped);
-//     fn force_drive(& mut self, direction: geometry_msgs::Twist);
-//     fn get_location(& mut self) -> geometry_msgs::PoseStamped;
-//     fn set_initial_pose(& mut self, pose: geometry_msgs::PoseStamped);
-//     fn go(& mut self, goal: geometry_msgs::PoseStamped, timeout: i32);
-//     fn reset_costmap(& mut self);
-//     fn cancel_goal(& mut self);
-// }
+use amigo_arm::Arm;
+use amigo_base::Base;
+
+pub struct Amigo{
+    name: String,
+    leftArm: amigo_arm::AmigoArm,
+    rightArm: amigo_arm::AmigoArm,
+    base: amigo_base::AmigoBase,
+}
+
+pub trait Robot {
+    fn new(name: String) -> Self;
+}
+
+impl Robot for Amigo {
+    fn new(name: String) -> Amigo {
+        Amigo{name: name,
+              leftArm: amigo_arm::AmigoArm::new("left".to_string()),
+              rightArm: amigo_arm::AmigoArm::new("right".to_string()),
+              base: amigo_base::AmigoBase::new()}
+    }
+}

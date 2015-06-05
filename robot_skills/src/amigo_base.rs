@@ -9,7 +9,8 @@ enum BaseError {
 
 pub type BaseResult = Result<geometry_msgs::PoseStamped, BaseError>;
 
-trait Base {
+pub trait Base {
+    fn new() -> Self;
     fn base_move(& mut self, goal: geometry_msgs::PoseStamped) -> BaseResult;
     fn force_drive(& mut self, direction: geometry_msgs::Twist) -> BaseResult;
     fn get_location(& mut self) -> geometry_msgs::PoseStamped;
@@ -20,12 +21,17 @@ trait Base {
 }
 
 #[derive(Debug)]
-struct AmigoBase
+pub struct AmigoBase
 {
     current_position: geometry_msgs::PoseStamped,
 }
 
 impl Base for AmigoBase {
+
+    fn new() -> AmigoBase{
+        AmigoBase{  current_position: Default::default()}
+    }
+    
     fn base_move(& mut self, goal: geometry_msgs::PoseStamped) -> BaseResult{
         self.current_position = goal;
         return Ok(self.current_position);

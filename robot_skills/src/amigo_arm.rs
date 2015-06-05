@@ -1,14 +1,24 @@
 extern crate geometry_msgs;
 
+#[derive(Debug)]
+enum ArmError {
+    JointLimitHit,
+    HardwareFail,
+    EnvironmentCollision,
+    SelfCollision,
+}
+
+pub type ArmResult = Result<bool, ArmError>;
+
 trait Arm {
     // fn new(side: String) -> Arm;
     fn operational(& mut self) -> bool;
-    fn send_goal(& mut self, goal: geometry_msgs::PoseStamped) -> bool;
-    fn send_joint_goal(& mut self, goal: Vec<f64>) -> bool;
-    fn send_joint_trajectory(& mut self, trajectory: Vec<Vec<f64>>) -> bool;
+    fn send_goal(& mut self, goal: geometry_msgs::PoseStamped) -> ArmResult;
+    fn send_joint_goal(& mut self, goal: Vec<f64>) -> ArmResult;
+    fn send_joint_trajectory(& mut self, trajectory: Vec<Vec<f64>>) -> ArmResult;
     fn reset(& mut self);
     fn occupied_by(& mut self) -> bool;
-    fn send_gripper_goal(& mut self, open_close: bool) -> bool;
+    fn send_gripper_goal(& mut self, open_close: bool) -> ArmResult;
 }
 
 #[derive(Debug)]
@@ -29,25 +39,26 @@ impl Arm for AmigoArm {
         return self.operational;
     }
         
-    fn send_goal(& mut self, goal: geometry_msgs::PoseStamped) -> bool{
+    fn send_goal(& mut self, goal: geometry_msgs::PoseStamped) -> ArmResult{
         self.end_effector_pose = goal;
-        return true;
+        return Ok(true);
     }
 
-    fn send_joint_goal(& mut self, goal: Vec<f64>) -> bool{
+    fn send_joint_goal(& mut self, goal: Vec<f64>) -> ArmResult{
         assert_eq!(goal.len(), self.joints.len());
 
         self.joints = goal;
-        return true
+        return Ok(true)
     }
 
-    fn send_joint_trajectory(& mut self, trajectory: Vec<Vec<f64>>) -> bool{
+    fn send_joint_trajectory(& mut self, trajectory: Vec<Vec<f64>>) -> ArmResult{
         for pose in trajectory {
-            if(!self.send_joint_goal(pose)){
-                return false;
+            match self.send_joint_goal(pose){
+                Ok(result) => (),
+                Err(why) => return Err(why)
             }
         }
-        return true;
+        return Ok(true);
     }
 
     fn reset(& mut self){
@@ -58,7 +69,7 @@ impl Arm for AmigoArm {
         return true;
     }
 
-    fn send_gripper_goal(& mut self, open_close: bool) -> bool{
-        return true;
+    fn send_gripper_goal(& mut self, open_close: bool) -> ArmResult{
+        return Ok(true);
     }
 }
